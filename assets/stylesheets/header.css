@@ -203,10 +203,13 @@
 
 .nav-container > a:first-of-type {
     margin-right: 8px;
+}
+
+.nav-container > a:nth-of-type(7) {
     background-color: rgb(20, 147, 255);
     border-radius: 4px;
 }
 
-.nav-container > a:not(:first-child) {
+.av-container > a:not(:first-child) {
     margin: 0 8px;
 }
