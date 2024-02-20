@@ -1,0 +1,215 @@
+.header-top, .header-middle, .header-bottom {
+    display: flex;
+    margin: 0 7%;
+    padding: 0 2%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-top {
+    height: 35px;
+}
+
+.header-middle {
+    height: 62px;
+}
+
+.header-bottom {
+    height: 56px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: white;
+    font-weight: 400;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.header {
+    background: linear-gradient(328.22deg, #005fc8 38.8%, #61019b);
+    color: white;
+    width: 100%;
+}
+
+.header-gambling-message, .header-login-time {
+    display: flex;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+    font-size: 10px;
+    font-weight: 400;
+    font-family: ProximaNovaRegular, Arial, sans-serif;
+}
+
+.header-gambling-message {
+    font-family: ProximaNovaRegular, Arial, sans-serif;
+}
+
+.responsible-gaming-logo {
+    height: 25px;
+    width: 25px;
+    margin: 0 5px;
+}
+
+.add-funds-btn {
+    display: inline-flex;
+    width: 32px;
+    height: 33px;
+    background-image: url("https://casino.fanduel.com/client/assets/images/add_funds-fanduel.svg?v=_BUILD_");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+}
+
+.account-icon-btn {
+    background-image: url("https://casino.fanduel.com/client/assets/images/account_details-fanduel.svg?v=_BUILD_");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    width: 33px;
+    height: 30px;
+    background-size: cover;
+}
+
+.account-notification-btn {
+    background-image: url("../images/notification-icon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 33px;
+    height: 30px;
+    background-size: contain;
+}
+
+.logo-image {
+    height: 35px;
+    width: 125.297px;
+    overflow: clip;
+}
+
+.logo-menu-group {
+    display: flex;
+}
+
+.menu-group {
+    display: flex;
+    margin-left: 63px;
+    justify-content: space-between;
+    width: 160px;
+}
+
+.account-funds-group {
+    display: flex;
+    justify-content: space-between;
+    width: 187.602px;
+}
+
+.funds-container {
+    display: flex;
+}
+
+.funds {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.funds-value, .dollar-sign {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.funds-text {
+    font-size: 10px;
+    font-weight: 400;
+    font-family: ProximaNovaRegular;
+    -webkit-font-smoothing: antialiased;
+}
+
+.add-funds-btn {
+    margin-left: 8px;
+    height: 33px;
+    width: 32px;
+}
+
+.account-notification-btn, .account-icon-btn {
+    height: 33px;
+    width: 32px;
+}
+
+.casino {
+    font-weight: bold;
+    border-bottom: 4px solid rgb(20, 147, 255);
+}
+
+.scroll-menu {
+    width: 82.5%;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    width: 100%;
+    position: sticky;
+    display: flex;
+    max-height: 44px;
+    white-space: nowrap;
+    overflow: auto;
+    vertical-align: baseline;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 87%, transparent 97%);
+}
+
+.promotions-img {
+    height: 16px;
+    width: 16px;
+}
+
+.nav-container > a {
+    padding: 13.5px 16px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-search-icon {
+    height: 16px;
+    width: 16px;
+    background-image: url("https://casino.fanduel.com/client/assets/images/search-fanduel.svg?v=_BUILD_");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.nav-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-search {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 178px;
+    padding: 8px;
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+.search-games {
+    margin-left: 8px;
+}
+
+.nav-container > a:first-of-type {
+    margin-right: 8px;
+}
+
+.nav-container > a:nth-of-type(7) {
+    background-color: rgb(20, 147, 255);
+    border-radius: 4px;
+}
+
+.av-container > a:not(:first-child) {
+    margin: 0 8px;
+}
