@@ -109,15 +109,25 @@ i {
     width: 195px;
 }
 
-.recently-played-game-container > img {
-    height: 248px;
+.game-img {
     width: 100%;
-    border-radius: 16px;
-    margin: 13px 0;
+    height: 100%;
+    transition: transform .3s ease-out .1s;
 }
 
-#blackjack-img {
-    margin-top: 0;
+.game-img-wrapper {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height: 248px;
+    width: 100%;
+    margin: 13px 0;
+    border-radius: 16px;
+}
+
+.game-img-wrapper > img:hover {
+    transform: scale3d(1.08, 1.08, 1);
+    border-radius: 16px;
 }
 
 .recently-played-container {
