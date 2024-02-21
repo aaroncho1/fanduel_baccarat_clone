@@ -112,7 +112,8 @@ i {
 .game-img {
     width: 100%;
     height: 100%;
-    transition: transform .3s ease-out .1s;
+    transition: transform .3s ease-out .1s, opacity .3s ease-out .1s;
+    opacity: .9;
 }
 
 .game-img-wrapper {
@@ -128,6 +129,7 @@ i {
 .game-img-wrapper > img:hover {
     transform: scale3d(1.08, 1.08, 1);
     border-radius: 16px;
+    opacity: 1;
 }
 
 .recently-played-container {
