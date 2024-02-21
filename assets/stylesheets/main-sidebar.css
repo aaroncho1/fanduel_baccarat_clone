@@ -107,6 +107,7 @@ i {
 
 .recently-played-game-container {
     width: 195px;
+    margin: 13px 0;
 }
 
 .game-img {
@@ -122,7 +123,7 @@ i {
     overflow: hidden;
     height: 248px;
     width: 100%;
-    margin: 13px 0;
+    /* margin: 13px 0; */
     border-radius: 16px;
 }
 
@@ -148,10 +149,16 @@ i {
 .game-info {
     font-size: 12px;
     font-weight: 400;
+    line-height: 17.5px;
 }
 
 .game-description {
     padding: 0 6px;
     display: flex;
     justify-content: space-between;
+    margin-top: 13px;
+}
+
+#blackjack-game-container {
+    margin-top: 0;
 }
