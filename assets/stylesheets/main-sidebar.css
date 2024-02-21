@@ -45,7 +45,7 @@ i {
 }
 
 .rewards-carousel-img {
-    height: 106px;
+    height: 86px;
     width: 100%;
     margin-bottom: -4px;
     border-top-left-radius: 6px;
@@ -82,4 +82,64 @@ i {
 .featured-game-btns>a:first-of-type {
     border: 1px solid white;
     border-radius: 3px;
+}
+
+.rich-text-line {
+    display: block;
+    width: 90%;
+    border-bottom: 3px solid #cfd6db;
+}
+
+.text-break-line {
+    display: flex;
+    justify-content: center;
+}
+
+.recently-played-container {
+    text-align: left;
+}
+
+.recently-played-text {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 15px;
+}
+
+.recently-played-game-container {
+    width: 195px;
+}
+
+.recently-played-game-container > img {
+    height: 248px;
+    width: 100%;
+    border-radius: 16px;
+    margin: 13px 0;
+}
+
+#blackjack-img {
+    margin-top: 0;
+}
+
+.recently-played-container {
+    padding-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+.game-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.game-info {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.game-description {
+    padding: 0 6px;
+    display: flex;
+    justify-content: space-between;
 }
