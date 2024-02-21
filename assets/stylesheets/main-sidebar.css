@@ -118,7 +118,7 @@ i {
     width: 100%;
     height: 100%;
     transition: transform .3s ease-out .1s, opacity .3s ease-out .1s;
-    opacity: .9;
+    opacity: .95;
 }
 
 .game-img-wrapper {
@@ -173,4 +173,9 @@ i {
 .fav-component:hover {
     color: rgb(85, 26, 139);
     opacity: 1;
+}
+
+.main {
+    background-color: #FBFBFB;
+    height: 100%;
 }
