@@ -16,6 +16,26 @@
     border-bottom: 1px solid rgb(129, 142, 149);
 }
 
+.footer-bottom {
+    margin: 0 8%;
+    padding: 16px 0 42px 0;
+    color: #152a47;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.footer-bottom > p:not(:nth-of-type(1)) {
+    font-weight: 400;
+}
+
+.footer-bottom > p:nth-of-type(1) {
+    font-weight: 700;
+}
+
+
+
 .footer-top-left-box, .footer-top-right-box {
     display: flex;
     flex-direction: column;
@@ -33,5 +53,13 @@
 .footer-top-left-box > a, .footer-top-right-box > a {
     margin: 4px 0;
     padding: 4px 0;
+}
+
+.footer-bottom > p, .footer-bottom > div:not(:nth-of-type(2)) {
+    padding: 8px;
+}
+
+.footer-rg-logos > a > img {
+    margin: 8px;
 }
 
