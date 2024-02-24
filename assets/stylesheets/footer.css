@@ -6,3 +6,11 @@
     line-height: 16px;
     font-family: Arial, sans-serif;
 }
+
+.footer-top {
+    margin: 0 8%;
+    padding: 16px 8px;
+    color: #818e95;
+    font-size: 12px;
+}
+
