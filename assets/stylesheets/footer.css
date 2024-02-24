@@ -12,5 +12,26 @@
     padding: 16px 8px;
     color: #818e95;
     font-size: 12px;
+    display: flex;
+    border-bottom: 1px solid rgb(129, 142, 149);
+}
+
+.footer-top-left-box, .footer-top-right-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-top-left-box {
+    margin-right: 40px;
+}
+
+.footer-top-title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.footer-top-left-box > a, .footer-top-right-box > a {
+    margin: 4px 0;
+    padding: 4px 0;
 }
 
