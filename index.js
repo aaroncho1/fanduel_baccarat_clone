@@ -6,7 +6,7 @@ document.getElementById("datetime").innerHTML = datetime;
 let button = document.querySelector('.arrow-next')
 button.onclick = function(){
     let container = document.querySelector('.nav-container');
-    sideScroll(container, 'right', 15, 250, 10);
+    sideScroll(container, 'right', 15, 250, 30);
 }
 
 function sideScroll(element, direction, speed, distance, step){
