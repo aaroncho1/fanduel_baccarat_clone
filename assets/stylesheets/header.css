@@ -213,3 +213,27 @@
 .av-container > a:not(:first-child) {
     margin: 0 8px;
 }
+
+.arrow-next-img {
+    height: 44px;
+    width: 44px;
+}
+
+.arrow-next > svg {
+    background: #005fc8;
+    position: absolute;
+    right: 10px;
+    fill: none;
+    cursor: pointer;
+}
+
+.arrow-next > svg:not(:root) {
+    overflow-clip-margin: content-box;
+    overflow: hidden;
+}
+
+.arrow-next {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
