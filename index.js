@@ -3,10 +3,16 @@ var datetime = now.toLocaleString();
 
 document.getElementById("datetime").innerHTML = datetime;
 
-let button = document.querySelector('.arrow-next')
-button.onclick = function(){
+let nextButton = document.querySelector('.arrow-next')
+nextButton.onclick = () => {
     let container = document.querySelector('.nav-container');
     sideScroll(container, 'right', 15, 250, 30);
+}
+
+let backButton = document.querySelector('.arrow-back')
+backButton.onclick = () => {
+    let container = document.querySelector('.nav-container');
+    sideScroll(container, 'left', 15, 250, 30);
 }
 
 function sideScroll(element, direction, speed, distance, step){

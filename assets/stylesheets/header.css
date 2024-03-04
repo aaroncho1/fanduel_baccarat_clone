@@ -145,6 +145,7 @@
     margin-right: 12px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .nav-container {
@@ -236,4 +237,17 @@
     display: flex;
     align-items: center;
     position: relative;
+}
+
+.arrow-back {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: -30px;
+}
+
+.arrow-back > svg {
+    display: none;
+    fill: none;
+    cursor: pointer;
 }
