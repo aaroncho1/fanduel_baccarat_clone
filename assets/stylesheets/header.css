@@ -155,9 +155,10 @@
     max-height: 44px;
     white-space: nowrap;
     overflow: auto;
+    overflow-x: clipped;
     vertical-align: baseline;
     scrollbar-width: none;
-    -webkit-mask-image: linear-gradient(90deg, #000 87%, transparent 97%);
+    -webkit-mask-image: linear-gradient(90deg, #000 80%, transparent 97%);
 }
 
 .promotions-img {
@@ -223,7 +224,7 @@
 .arrow-next > svg {
     background: #005fc8;
     position: absolute;
-    right: 10px;
+    right: -10px;
     fill: none;
     cursor: pointer;
 }
@@ -243,7 +244,8 @@
     display: flex;
     align-items: center;
     position: absolute;
-    left: -30px;
+    margin-right: 16px;
+    z-index: 1000;
 }
 
 .arrow-back > svg {

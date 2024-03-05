@@ -3,16 +3,16 @@ var datetime = now.toLocaleString();
 
 document.getElementById("datetime").innerHTML = datetime;
 
+let navContainer = document.querySelector('.nav-container');
+
 let nextButton = document.querySelector('.arrow-next')
 nextButton.onclick = () => {
-    let container = document.querySelector('.nav-container');
-    sideScroll(container, 'right', 15, 250, 30);
+    sideScroll(navContainer, 'right', 15, 500, 30);
 }
 
 let backButton = document.querySelector('.arrow-back')
 backButton.onclick = () => {
-    let container = document.querySelector('.nav-container');
-    sideScroll(container, 'left', 15, 250, 30);
+    sideScroll(navContainer, 'left', 15, 500, 30);
 }
 
 function sideScroll(element, direction, speed, distance, step){
@@ -29,4 +29,25 @@ function sideScroll(element, direction, speed, distance, step){
         }
     }, speed);
 }
+
+function isElementAtMaximumRight(element) {
+    return ((element.scrollWidth - element.clientWidth) >= (element.scrollLeft)) && ((element.scrollWidth - element.clientWidth) <= (element.scrollLeft + 1)) 
+}
+
+
+navContainer.addEventListener('scroll', () => {
+    scrollPos = navContainer.scrollLeft;
+    if (scrollPos > 0) {document.getElementById('arrow-back-svg').style.display = 'block';
+        document.querySelector('.nav-container').style.webkitMaskImage = 'linear-gradient(270deg, #000 80%, transparent 97%)'
+    } else {
+        document.getElementById('arrow-back-svg').style.display = 'none';
+        document.querySelector('.nav-container').style.webkitMaskImage = 'linear-gradient(90deg, #000 80%, transparent 97%)'
+    }
+    if (isElementAtMaximumRight(navContainer)){
+        nextButton.style.display = 'none';
+    } else {
+        nextButton.style.display = 'flex';
+    }
+})
+
 
