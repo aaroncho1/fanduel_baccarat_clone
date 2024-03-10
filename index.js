@@ -50,4 +50,27 @@ navContainer.addEventListener('scroll', () => {
     }
 })
 
-
+document.addEventListener("DOMContentLoaded", (event) => {
+    let playerCardImages = document.querySelector('.player-cards').children
+    let bankerCardImages = document.querySelector('.banker-cards').children
+    if (playerCardImages.length > 2) {
+        for (let playerCard of playerCardImages){
+            playerCard.style.maxHeight = "150px";
+            playerCard.style.maxWidth = "115px";
+        }
+    } else {
+        for (let playerCard of playerCardImages) {
+            playerCard.style.maxHeight = "auto"
+        }
+    }
+    if (bankerCardImages.length > 2) {
+        for (let bankerCard of bankerCardImages) {
+            bankerCard.style.maxHeight = "150px";
+            bankerCard.style.maxWidth = "115px";
+        }
+    } else {
+        for (let bankerCard of bankerCardImages) {
+            bankerCard.style.maxHeight = "auto"
+        }
+    }
+})

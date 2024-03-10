@@ -15,10 +15,21 @@
 
 .game-top {
     height: 440px;
-    width: 60%;
-    margin: 20px auto;
+    padding: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.game-top-fanduel-logo > img {
+    height: 35px;
+}
+
+.card-container {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .player-box, .banker-box {
@@ -31,19 +42,18 @@
 
 .player-box > h1, .banker-box > h1 {
     font-size: 40px;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    -webkit-font-smoothing: antialiased;
 }
 
 .player-cards, .banker-cards {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 330px;
     padding: 20px;
     text-align: center;
 }
 
-.game-top img {
+.player-cards > img, .banker-cards > img {
     width: 45%;
     height: auto;
     border-radius: 12px;
@@ -53,6 +63,36 @@
     border-right: 3px solid white;
 }
 
-.selections-box {
-    height: 490px;
+.game-bottom {
+    height: 440px;
+}
+
+.min-bet, .max-bet {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bet-limits span:nth-of-type(1) {
+    margin-right: 15px;
+}
+
+.bet-limits > p {
+    margin-bottom: 5px;
+}
+
+.bet-limits > div {
+    margin-bottom: 2px;
+}
+
+.game-top-fanduel-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-top-fanduel-logo > p {
+    color: white;
+    font-family: cursive;
+    font-weight: bold;
+    font-size: 20px;
 }
