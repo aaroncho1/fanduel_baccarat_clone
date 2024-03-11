@@ -108,19 +108,22 @@
 }
 
 .wager-selections img {
-    height: 75px;
-    width: 75px;
+    height: 60px;
+    width: 60px;
 }
 
 .wager-selections, .bet-history-table {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 10px;
     border: 2px solid rgba(255, 201, 38, 0.5);
     border-radius: 5px;
     background: #333;
     opacity: 0.8;
+}
+
+.wager-selections-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .selections-box p {
@@ -143,8 +146,14 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.wager-selections > div, .wager-selections > button {
-    margin-bottom: 2px;
+.wager-selections {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wager-selections-top > div {
+    margin-bottom: 5px;
 }
 
 tr {
@@ -157,4 +166,19 @@ th, td {
 
 .bet-history-table-container {
     overflow: auto;
+}
+
+#clear-btn, #cash-out-btn {
+    width: 100%;
+    text-align: center;
+    margin: 2px 0;
+    padding: 5px 0;
+}
+
+#clear-btn {
+    background: gray;
+}
+
+#cash-out-btn {
+    background: green;
 }
