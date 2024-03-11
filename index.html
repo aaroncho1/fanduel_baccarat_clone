@@ -170,15 +170,17 @@
 
         <div class="main-game">
             <div class="game-top">
-                <div class="bet-limits">
-                    <p>Bet Limits</p>
-                    <div class="min-bet">
-                        <span>Min Bet: </span>
-                        <span>$1.00</span>
-                    </div>
-                    <div class="max-bet">
-                        <span>Max Bet: </span>
-                        <span>$1,000.00</span>
+                <div class="bet-limits-container">
+                    <div class="bet-limits">
+                        <p>Bet Limits</p>
+                        <div class="min-bet">
+                            <span>Min Bet: </span>
+                            <span>$1.00</span>
+                        </div>
+                        <div class="max-bet">
+                            <span>Max Bet: </span>
+                            <span>$1,000.00</span>
+                        </div>
                     </div>
                 </div>
                 <div class="card-container">
@@ -206,36 +208,56 @@
             </div>
             <div class="game-bottom">
                 <div class="wager-selections">
+                    <div class="available-balance-container">
+                        <span>Available Balance: </span>
+                        <span id="total-wager">$0</span>
+                    </div>
+                    <div class="total-wager-container">
+                        <span>Total Wager: </span>
+                        <span id="total-wager">$0</span>
+                    </div>
+                    <button>CLEAR</button>
                     <img src="./assets/images/1-chip.png">
                     <img src="./assets/images/25-chip.png">
                     <img src="./assets/images/100-chip.png">
                     <img src="./assets/images/500-chip.png">
                     <img src="./assets/images/1000-chip.png">
-                    <span>Total Wager: </span><span>$0.00</span>
                 </div>
                 <div class="selections-box">
-                    <div class="player"></div>
-                    <div class="tie"></div>
-                    <div class="banker"></div>
+                    <div class="tie">
+
+                        <p>TIE</p>
+                        <p>8:1</p>
+                    </div>
+                    <div class="banker">
+                        <p>BANKER</p>
+                        <p>0.95:1</p>
+                    </div>
+                    <div class="player">
+                        <p>PLAYER</p>
+                        <p>1:1</p>
+                    </div>
                 </div>
-                <table class="bet-history-table">
-                    <tr>
-                        <th>P</th>
-                        <th>B</th>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>7</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>9</td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
-                </table>
+                <div class="bet-history-table-container">
+                    <table class="bet-history-table">
+                        <tr>
+                            <th>P</th>
+                            <th>B</th>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>10</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

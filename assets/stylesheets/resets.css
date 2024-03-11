@@ -1,5 +1,5 @@
 html, body, header, div, span, h1, p, ul, li, a, i, 
-img, svg, path, button {
+img, svg, path, button, table, tr, td, th {
     margin: 0;
     border: 0;
     padding: 0;
