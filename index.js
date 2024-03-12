@@ -15,6 +15,18 @@ backButton.onclick = () => {
     sideScroll(navContainer, 'left', 15, 500, 30);
 }
 
+let wager = document.getElementById('total-wager');
+
+let balance = document.getElementById('available-balance');
+
+function disableChips() {
+    if (parseFloat(parseFloat(balance.textContent).toFixed(2)) === 0) {
+        for (let chipImg of document.querySelector('.wager-selections-bottom').children) {
+            chipImg.style.opacity = '.2';
+        }
+    }
+}
+
 function sideScroll(element, direction, speed, distance, step){
     scrollAmount = 0;
     let slideTimer = setInterval(function(){
@@ -74,3 +86,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
     }
 })
+
+document.addEventListener("DOMContentLoaded", disableChips);
