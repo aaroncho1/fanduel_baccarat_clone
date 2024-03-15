@@ -2,6 +2,7 @@ let wager = parseFloat(parseFloat((document.getElementById('total-wager')).textC
 let wagerElement = document.getElementById('total-wager');
 let balance = parseFloat(parseFloat((document.getElementById('available-balance')).textContent).toFixed(2))
 let balanceElement = document.getElementById('available-balance');
+let chipIdsArr = ['1-chip', '25-chip', '100-chip', '500-chip', '1000-chip'];
 
 let chipsImgElements = document.querySelector('.wager-selections-bottom').children
 
@@ -47,23 +48,21 @@ function disableChips() {
 
 document.addEventListener("DOMContentLoaded", disableChips);
 
-document.getElementById('1-chip').onclick = () => {
-    if (balance < 1){
-        document.getElementById('1-chip').style.opacity = '.2';
-    } else {
-        wagerElement.textContent = String(wager += 1);
-        disableChips();
-    } 
+function chipOnClick() {
+    chipIdsArr.forEach( id => {
+        document.getElementById(id).onclick = () => {
+            let amount = Number(id.split('-')[0]);
+            if (balance < amount){
+                document.getElementById(id).style.opacity = '.2';
+            } else {
+                wagerElement.textContent = String(wager += amount);
+                disableChips();
+            }
+        }
+    })
 }
 
-document.getElementById('25-chip').onclick = () => {
-    if (balance < 25) {
-        document.getElementById('25-chip').style.opacity = '.2';
-    } else {
-        wagerElement.textContent = String(wager += 25);
-        disableChips();
-    }
-}
+document.addEventListener('DOMContentLoaded', chipOnClick);
 
 document.getElementById('clear-btn').onclick = () => {
     wager = 0;
