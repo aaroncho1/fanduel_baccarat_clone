@@ -74,3 +74,19 @@ document.getElementById('clear-btn').onclick = () => {
     wager = 0;
     wagerElement.textContent = "0.00";
 }
+
+Array.from(document.querySelector('.selections-box').children).forEach(div => div.addEventListener("mouseover", () => {
+    div.querySelector('p:first-of-type').style.display = 'none';
+    div.querySelector('p:nth-of-type(2)').style.display = 'none';
+    div.querySelector('p:last-of-type').style.display = 'block';
+    div.classList.add('selections-hover-effect');
+    div.style.border = "2px solid black";
+}))
+
+Array.from(document.querySelector('.selections-box').children).forEach(div => div.addEventListener("mouseout", () => {
+    div.querySelector('p:first-of-type').style.display = 'block';
+    div.querySelector('p:nth-of-type(2)').style.display = 'block';
+    div.querySelector('p:last-of-type').style.display = 'none';
+    div.classList.remove('selections-hover-effect');
+    div.style.border = "2px solid #BAD7C8";
+}))

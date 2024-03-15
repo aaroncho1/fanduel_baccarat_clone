@@ -140,6 +140,8 @@
     border-radius: 25px;
     border: 2px solid #BAD7C8;
     min-height: 100px;
+    min-width: 455.13px;
+    max-width: 455.13px;
 }
 
 .wager-selections, .bet-limits, .bet-history-table-container {
@@ -183,4 +185,16 @@ th, td {
 
 #cash-out-btn {
     background: green;
+}
+
+.selections-hover-effect {
+    background: #BAD7C8;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selections-box p:last-of-type {
+    display: none;
 }
