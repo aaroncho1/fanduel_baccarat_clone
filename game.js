@@ -51,7 +51,7 @@ document.getElementById('1-chip').onclick = () => {
     if (balance < 1){
         document.getElementById('1-chip').style.opacity = '.2';
     } else {
-        wagerElement.textContent = String(balance += 1);
+        wagerElement.textContent = String(wager += 1);
         disableChips();
     } 
 }
@@ -60,7 +60,7 @@ document.getElementById('25-chip').onclick = () => {
     if (balance < 25) {
         document.getElementById('25-chip').style.opacity = '.2';
     } else {
-        wagerElement.textContent = String(balance += 25);
+        wagerElement.textContent = String(wager += 25);
         disableChips();
     }
 }
