@@ -52,11 +52,17 @@ function chipOnClick() {
     chipIdsArr.forEach( id => {
         document.getElementById(id).onclick = () => {
             let amount = Number(id.split('-')[0]);
-            if (balance < amount){
-                document.getElementById(id).style.opacity = '.2';
-            } else {
-                wagerElement.textContent = String(wager += amount);
-                disableChips();
+            if (wager < balance){
+                if (balance < amount){
+                    document.getElementById(id).style.opacity = '.2';
+                } else {
+                    if (wager + amount <= balance){
+                        wagerElement.textContent = String(wager += amount);
+                        disableChips();
+                    } else {
+                        disableChips();
+                    }
+                }
             }
         }
     })
