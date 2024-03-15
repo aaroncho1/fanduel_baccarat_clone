@@ -64,3 +64,8 @@ document.getElementById('25-chip').onclick = () => {
         disableChips();
     }
 }
+
+document.getElementById('clear-btn').onclick = () => {
+    wager = 0;
+    wagerElement.textContent = "0.00";
+}
