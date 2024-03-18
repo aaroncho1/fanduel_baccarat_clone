@@ -132,7 +132,8 @@
 }
 
 .selections-box > div {
-    padding: 2px 140px;
+    padding: 2px;
+    text-align: center;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
@@ -197,4 +198,5 @@ th, td {
 
 .selections-box p:last-of-type {
     display: none;
+    font-size: 1.5rem;
 }

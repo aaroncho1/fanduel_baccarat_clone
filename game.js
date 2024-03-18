@@ -76,11 +76,14 @@ document.getElementById('clear-btn').onclick = () => {
 }
 
 Array.from(document.querySelector('.selections-box').children).forEach(div => div.addEventListener("mouseover", () => {
-    div.querySelector('p:first-of-type').style.display = 'none';
-    div.querySelector('p:nth-of-type(2)').style.display = 'none';
-    div.querySelector('p:last-of-type').style.display = 'block';
-    div.classList.add('selections-hover-effect');
-    div.style.border = "2px solid black";
+    if (wager > 0){ 
+        document.getElementById(`mouseover-${div.className}-wager`).textContent = wager;
+        div.querySelector('p:first-of-type').style.display = 'none';
+        div.querySelector('p:nth-of-type(2)').style.display = 'none';
+        div.querySelector('p:last-of-type').style.display = 'block';
+        div.classList.add('selections-hover-effect');
+        div.style.border = "2px solid black";
+    } 
 }))
 
 Array.from(document.querySelector('.selections-box').children).forEach(div => div.addEventListener("mouseout", () => {
