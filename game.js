@@ -48,7 +48,10 @@ function disableChips() {
 
 document.addEventListener("DOMContentLoaded", disableChips);
 
-function chipOnClick() {
+function setChipsAndCashoutBtn() {
+    if (balance === 0){
+        document.getElementById('cash-out-btn').style.opacity = '.2';
+    }
     chipIdsArr.forEach( id => {
         document.getElementById(id).onclick = () => {
             let amount = Number(id.split('-')[0]);
@@ -68,7 +71,7 @@ function chipOnClick() {
     })
 }
 
-document.addEventListener('DOMContentLoaded', chipOnClick);
+document.addEventListener('DOMContentLoaded', setChipsAndCashoutBtn);
 
 document.getElementById('clear-btn').onclick = () => {
     wager = 0;
