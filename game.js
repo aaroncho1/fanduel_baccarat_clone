@@ -2,6 +2,7 @@ let wager = parseFloat(parseFloat((document.getElementById('total-wager')).textC
 let wagerElement = document.getElementById('total-wager');
 let balance = parseFloat(parseFloat((document.getElementById('available-balance')).textContent).toFixed(2))
 let balanceElement = document.getElementById('available-balance');
+let cashOutBtnElement = document.getElementById('cash-out-btn');
 let chipIdsArr = ['1-chip', '25-chip', '100-chip', '500-chip', '1000-chip'];
 
 let chipsImgElements = document.querySelector('.wager-selections-bottom').children
@@ -49,9 +50,7 @@ function disableChips() {
 document.addEventListener("DOMContentLoaded", disableChips);
 
 function setChipsAndCashoutBtn() {
-    if (balance === 0){
-        document.getElementById('cash-out-btn').style.opacity = '.2';
-    }
+    balance === 0 ? cashOutBtnElement.style.opacity = '.2' : cashOutBtnElement.style.opacity = '1';
     chipIdsArr.forEach( id => {
         document.getElementById(id).onclick = () => {
             let amount = Number(id.split('-')[0]);
