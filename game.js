@@ -4,6 +4,10 @@ let balance = parseFloat(parseFloat((document.getElementById('available-balance'
 let balanceElement = document.getElementById('available-balance');
 let cashOutBtnElement = document.getElementById('cash-out-btn');
 let chipIdsArr = ['1-chip', '25-chip', '100-chip', '500-chip', '1000-chip'];
+let cardsObj = {
+    '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'A': 1, 'J': 10, 'Q': 10, 'K': 10
+};
+let cardsArr = Object.keys(cardsObj);
 
 let chipsImgElements = document.querySelector('.wager-selections-bottom').children
 
@@ -95,3 +99,18 @@ Array.from(document.querySelector('.selections-box').children).forEach(div => di
     div.classList.remove('selections-hover-effect');
     div.style.border = "2px solid #BAD7C8";
 }))
+
+function drawCards(){
+    let drawnCard = cardsArr[Math.floor(Math.random() * cardsArr.length)];
+    let cardImgElement = document.createElement('img');
+    cardImgElement.setAttribute('src', `./assets/images/${drawnCard}-card.png`);
+    document.querySelector('.player-cards').appendChild(cardImgElement);
+}
+
+document.querySelector('.tie').addEventListener('click', () => {
+    if (wager > 0){
+        balance -= wager;
+        balanceElement.textContent = balance;
+        drawCards();
+    }
+});
