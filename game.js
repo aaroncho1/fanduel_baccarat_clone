@@ -8,6 +8,10 @@ let cardsObj = {
     '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'A': 1, 'J': 10, 'Q': 10, 'K': 10
 };
 let cardsArr = Object.keys(cardsObj);
+let playerScoreElement = document.getElementById('player-score');
+let playerScore = 0;
+let bankerScoreElement = document.getElementById('banker-score');
+let bankerScore = 0;
 
 let chipsImgElements = document.querySelector('.wager-selections-bottom').children
 
@@ -75,42 +79,74 @@ function setChipsAndCashoutBtn() {
 }
 
 document.addEventListener('DOMContentLoaded', setChipsAndCashoutBtn);
+document.addEventListener('DOMContentLoaded', () => {
+    mouseOverAllSelections();
+    mouseOutAllSelections();
+})
 
 document.getElementById('clear-btn').onclick = () => {
     wager = 0;
     wagerElement.textContent = "0.00";
 }
 
-Array.from(document.querySelector('.selections-box').children).forEach(div => div.addEventListener("mouseover", () => {
-    if (wager > 0){ 
+function mouseOverDivEffect(div){
+    if (wager > 0) {
         document.getElementById(`mouseover-${div.className}-wager`).textContent = wager;
         div.querySelector('p:first-of-type').style.display = 'none';
         div.querySelector('p:nth-of-type(2)').style.display = 'none';
         div.querySelector('p:last-of-type').style.display = 'block';
         div.classList.add('selections-hover-effect');
         div.style.border = "2px solid black";
-    } 
-}))
+    }
+}
 
-Array.from(document.querySelector('.selections-box').children).forEach(div => div.addEventListener("mouseout", () => {
+function mouseOutDivEffect(div){
     div.querySelector('p:first-of-type').style.display = 'block';
     div.querySelector('p:nth-of-type(2)').style.display = 'block';
     div.querySelector('p:last-of-type').style.display = 'none';
     div.classList.remove('selections-hover-effect');
     div.style.border = "2px solid #BAD7C8";
-}))
+}
 
-function drawCards(){
+function mouseOverAllSelections(){
+    Array.from(document.querySelector('.selections-box').children).forEach(div => div.addEventListener("mouseover", () => {
+        mouseOverDivEffect(div);
+    }))
+}
+
+function mouseOutAllSelections(){
+    Array.from(document.querySelector('.selections-box').children).forEach(div => div.addEventListener("mouseout", () => {
+        mouseOutDivEffect(div);
+    }))
+}
+
+function drawPlayerCard(){
     let drawnCard = cardsArr[Math.floor(Math.random() * cardsArr.length)];
     let cardImgElement = document.createElement('img');
     cardImgElement.setAttribute('src', `./assets/images/${drawnCard}-card.png`);
     document.querySelector('.player-cards').appendChild(cardImgElement);
+    playerScoreElement.textContent = playerScore += cardsObj[drawnCard];
 }
 
-document.querySelector('.tie').addEventListener('click', () => {
-    if (wager > 0){
+function drawBankerCard() {
+    let drawnCard = cardsArr[Math.floor(Math.random() * cardsArr.length)];
+    let cardImgElement = document.createElement('img');
+    cardImgElement.setAttribute('src', `./assets/images/${drawnCard}-card.png`);
+    document.querySelector('.banker-cards').appendChild(cardImgElement);
+    bankerScoreElement.textContent = bankerScore += cardsObj[drawnCard];
+}
+
+function drawCardsForTie(){
+    if (wager > 0) {
+        let tieDiv = document.querySelector('.tie');
+        tieDiv.removeEventListener('click', drawCardsForTie);
         balance -= wager;
         balanceElement.textContent = balance;
-        drawCards();
+        setTimeout(drawPlayerCard, 1000);
+        setTimeout(drawBankerCard, 2000);
+        setTimeout(drawPlayerCard, 3000);
+        setTimeout(drawBankerCard, 4000);
     }
-});
+}
+
+document.querySelector('.tie').addEventListener('click', drawCardsForTie);
