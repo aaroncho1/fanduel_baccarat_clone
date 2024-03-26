@@ -200,6 +200,7 @@ function drawCardsForTie(){
             }
         }, 5000);
     }
+    //have to finish function logic
 }
 
 document.querySelector('.tie').addEventListener('click', drawCardsForTie);
