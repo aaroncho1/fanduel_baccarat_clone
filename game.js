@@ -13,6 +13,8 @@ let playerScore = 0;
 let bankerScoreElement = document.getElementById('banker-score');
 let bankerScore = 0;
 let wagerInEffect = false;
+let bankerCardsDiv = document.querySelector('.banker-cards');
+let playerCardsDiv = document.querySelector('.player-cards');
 
 let chipsImgElements = document.querySelector('.wager-selections-bottom').children
 
@@ -126,7 +128,9 @@ function drawPlayerCard(){
     let cardImgElement = document.createElement('img');
     cardImgElement.setAttribute('src', `./assets/images/${drawnCard}-card.png`);
     document.querySelector('.player-cards').appendChild(cardImgElement);
-    playerScoreElement.textContent = playerScore += cardsObj[drawnCard];
+    playerScore += cardsObj[drawnCard];
+    playerScore = playerScore % 10;
+    playerScoreElement.textContent = playerScore
 }
 
 function drawBankerCard() {
@@ -134,7 +138,50 @@ function drawBankerCard() {
     let cardImgElement = document.createElement('img');
     cardImgElement.setAttribute('src', `./assets/images/${drawnCard}-card.png`);
     document.querySelector('.banker-cards').appendChild(cardImgElement);
-    bankerScoreElement.textContent = bankerScore += cardsObj[drawnCard];
+    bankerScore += cardsObj[drawnCard];
+    bankerScore = bankerScore % 10;
+    bankerScoreElement.textContent = bankerScore;
+}
+
+function drawFirstTwo(){
+    setTimeout(drawPlayerCard, 1000);
+    setTimeout(drawBankerCard, 2000);
+    setTimeout(drawPlayerCard, 3000);
+    setTimeout(drawBankerCard, 4000);
+    setTimeout(() => {
+        wagerInEffect = false;
+    }, 5000)
+}
+
+function drawThirdPlayerCard(){
+    if (playerScore < 6){
+        drawPlayerCard();
+        drawThirdBankerCard();
+    } else {
+        drawBankerCard();
+    }
+}
+
+function drawThirdBankerCard(){
+    setTimeout(() => {
+        if (bankerScore <= 2 && bankerCardsDiv.children.length < 3){
+            drawBankerCard();
+        } else if (bankerCardsDiv.children.length < 3 && bankerScore === 3 && parseInt(playerCardsDiv.children[2].src.split('-card')[0][playerCardsDiv.children[2].src.split('-card')[0].length - 1]) !== 8){
+            drawBankerCard();
+        } else if (bankerCardsDiv.children.length < 3 && bankerScore === 4 && [2, 3, 4, 5, 6, 7].includes(parseInt(playerCardsDiv.children[2].src.split('-card')[0][playerCardsDiv.children[2].src.split('-card')[0].length - 1]))){
+            drawBankerCard();
+        } else if (bankerCardsDiv.children.length < 3 && bankerScore === 5 && [4, 5, 6, 7].includes(parseInt(playerCardsDiv.children[2].src.split('-card')[0][playerCardsDiv.children[2].src.split('-card')[0].length - 1]))){
+            drawBankerCard();
+        } else if (bankerCardsDiv.children.length < 3 && bankerScore === 6 && [6, 7].includes(parseInt(playerCardsDiv.children[2].src.split('-card')[0][playerCardsDiv.children[2].src.split('-card')[0].length - 1]))) {
+            drawBankerCard();
+        } else if (bankerCardsDiv.children.length < 3 && bankerScore >= 7){
+            return;
+        }
+    }, 1000)
+}
+
+function naturalStands(){
+    return bankerScore > 7 || playerScore > 7;
 }
 
 function drawCardsForTie(){
@@ -143,10 +190,15 @@ function drawCardsForTie(){
         let tieDiv = document.querySelector('.tie');
         balance -= wager;
         balanceElement.textContent = balance;
-        setTimeout(drawPlayerCard, 1000);
-        setTimeout(drawBankerCard, 2000);
-        setTimeout(drawPlayerCard, 3000);
-        setTimeout(drawBankerCard, 4000);
+        drawFirstTwo();
+        setTimeout(() => {
+            if (naturalStands()){
+                return;
+            } else {
+                drawThirdPlayerCard();
+                drawThirdBankerCard();
+            }
+        }, 5000);
     }
 }
 
