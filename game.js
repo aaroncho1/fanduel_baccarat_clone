@@ -12,6 +12,7 @@ let playerScoreElement = document.getElementById('player-score');
 let playerScore = 0;
 let bankerScoreElement = document.getElementById('banker-score');
 let bankerScore = 0;
+let wagerInEffect = false;
 
 let chipsImgElements = document.querySelector('.wager-selections-bottom').children
 
@@ -90,7 +91,7 @@ document.getElementById('clear-btn').onclick = () => {
 }
 
 function mouseOverDivEffect(div){
-    if (wager > 0) {
+    if (wager > 0 && wagerInEffect === false) {
         document.getElementById(`mouseover-${div.className}-wager`).textContent = wager;
         div.querySelector('p:first-of-type').style.display = 'none';
         div.querySelector('p:nth-of-type(2)').style.display = 'none';
@@ -137,9 +138,9 @@ function drawBankerCard() {
 }
 
 function drawCardsForTie(){
-    if (wager > 0) {
+    if (wager > 0 && wagerInEffect === false) {
+        wagerInEffect = true;
         let tieDiv = document.querySelector('.tie');
-        tieDiv.removeEventListener('click', drawCardsForTie);
         balance -= wager;
         balanceElement.textContent = balance;
         setTimeout(drawPlayerCard, 1000);
