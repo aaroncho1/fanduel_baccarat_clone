@@ -16,7 +16,24 @@ let wagerInEffect = false;
 let bankerCardsDiv = document.querySelector('.banker-cards');
 let playerCardsDiv = document.querySelector('.player-cards');
 
-let chipsImgElements = document.querySelector('.wager-selections-bottom').children
+let chipsImgElements = document.querySelector('.wager-selections-bottom').children;
+
+function shrinkCards(){
+    if (playerCardsDiv.childElementCount > 2){
+        Array.from(playerCardsDiv.children).forEach( (img) => {
+            playerCardsDiv.style.width = '95%';
+            img.style.width = '108px';
+            img.style.height = '166px';
+        })
+    }
+    if (bankerCardsDiv.childElementCount > 2) {
+        Array.from(bankerCardsDiv.children).forEach((img) => {
+            bankerCardsDiv.style.width = '95%';
+            img.style.width = '108px';
+            img.style.height = '166px';
+        })
+    }
+}
 
 function disableSelectedChips(indOne, indTwo) {
     let chipsArr = Array.from(chipsImgElements);
@@ -177,6 +194,7 @@ function drawThirdBankerCard(){
         } else if (bankerCardsDiv.children.length < 3 && bankerScore >= 7){
             return;
         }
+        shrinkCards();
     }, 1000)
 }
 
@@ -196,6 +214,7 @@ function drawCardsForTie(){
                 return;
             } else {
                 drawThirdPlayerCard();
+                shrinkCards();
                 drawThirdBankerCard();
             }
         }, 5000);
