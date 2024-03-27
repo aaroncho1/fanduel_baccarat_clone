@@ -35,6 +35,16 @@ function shrinkCards(){
     }
 }
 
+function resetCardsStyle(){
+    [playerCardsDiv, bankerCardsDiv].forEach((div) => {
+        Array.from(div.children).forEach((img) => {
+            div.style.width = '100%';
+            img.style.width = '45%';
+            img.style.height = 'auto';
+        })
+    })
+}
+
 function disableSelectedChips(indOne, indTwo) {
     let chipsArr = Array.from(chipsImgElements);
     let disabledChips = chipsArr.splice(indOne, indTwo);
