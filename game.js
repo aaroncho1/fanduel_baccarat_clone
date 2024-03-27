@@ -3,7 +3,6 @@ let wagerElement = document.getElementById('total-wager');
 let balance = parseFloat(parseFloat((document.getElementById('available-balance')).textContent).toFixed(2))
 let balanceElement = document.getElementById('available-balance');
 let cashOutBtnElement = document.getElementById('cash-out-btn');
-let chipIdsArr = ['1-chip', '25-chip', '100-chip', '500-chip', '1000-chip'];
 let cardsObj = {
     '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'A': 1, 'J': 10, 'Q': 10, 'K': 10
 };
@@ -15,23 +14,25 @@ let bankerScore = 0;
 let wagerInEffect = false;
 let bankerCardsDiv = document.querySelector('.banker-cards');
 let playerCardsDiv = document.querySelector('.player-cards');
-
-let chipsImgElements = document.querySelector('.wager-selections-bottom').children;
+let wagerSelectionsDiv = document.querySelector('.wager-selections-bottom');
+let chipsImgElements = wagerSelectionsDiv.children;
 
 function shrinkCards(){
-    if (playerCardsDiv.childElementCount > 2){
-        Array.from(playerCardsDiv.children).forEach( (img) => {
-            playerCardsDiv.style.width = '95%';
-            img.style.width = '108px';
-            img.style.height = '166px';
-        })
-    }
-    if (bankerCardsDiv.childElementCount > 2) {
-        Array.from(bankerCardsDiv.children).forEach((img) => {
-            bankerCardsDiv.style.width = '95%';
-            img.style.width = '108px';
-            img.style.height = '166px';
-        })
+    if (window.innerWidth > 1280){
+        if (playerCardsDiv.childElementCount > 2){
+            Array.from(playerCardsDiv.children).forEach( (img) => {
+                playerCardsDiv.style.width = '95%';
+                img.style.width = '108px';
+                img.style.height = '166px';
+            })
+        }
+        if (bankerCardsDiv.childElementCount > 2) {
+            Array.from(bankerCardsDiv.children).forEach((img) => {
+                bankerCardsDiv.style.width = '95%';
+                img.style.width = '108px';
+                img.style.height = '166px';
+            })
+        }
     }
 }
 
@@ -61,6 +62,10 @@ function enableSelectedChips(indOne, indTwo) {
     }
 }
 
+function blackOutChips(){
+    Array.from(chipsImgElements).forEach(chip => chip.style.opacity = '.2');
+}
+
 function disableChips() {
     if (balance === 0) {
         for (let chipImg of document.querySelector('.wager-selections-bottom').children) {
@@ -87,25 +92,28 @@ function disableChips() {
 
 document.addEventListener("DOMContentLoaded", disableChips);
 
+
 function setChipsAndCashoutBtn() {
-    balance === 0 ? cashOutBtnElement.style.opacity = '.2' : cashOutBtnElement.style.opacity = '1';
-    chipIdsArr.forEach( id => {
-        document.getElementById(id).onclick = () => {
-            let amount = Number(id.split('-')[0]);
-            if (wager < balance){
-                if (balance < amount){
-                    document.getElementById(id).style.opacity = '.2';
-                } else {
-                    if (wager + amount <= balance){
-                        wagerElement.textContent = String(wager += amount);
-                        disableChips();
+    if (!wagerInEffect){
+        balance === 0 ? cashOutBtnElement.style.opacity = '.2' : cashOutBtnElement.style.opacity = '1';
+        Array.from(chipsImgElements).forEach( chip => {
+            chip.addEventListener('click', () => {
+                let amount = Number(chip.id.split('-')[0]);
+                if (wager < balance){
+                    if (balance < amount){
+                        document.getElementById(id).style.opacity = '.2';
                     } else {
-                        disableChips();
+                        if (wager + amount <= balance){
+                            wagerElement.textContent = String(wager += amount);
+                            disableChips();
+                        } else {
+                            disableChips();
+                        }
                     }
                 }
-            }
-        }
-    })
+            })
+        })
+    }
 }
 
 document.addEventListener('DOMContentLoaded', setChipsAndCashoutBtn);
@@ -177,7 +185,7 @@ function drawFirstTwo(){
     setTimeout(drawBankerCard, 4000);
     setTimeout(() => {
         wagerInEffect = false;
-    }, 5000)
+    }, 6000)
 }
 
 function drawThirdPlayerCard(){
@@ -215,6 +223,7 @@ function naturalStands(){
 function drawCardsForTie(){
     if (wager > 0 && wagerInEffect === false) {
         wagerInEffect = true;
+        blackOutChips();
         let tieDiv = document.querySelector('.tie');
         balance -= wager;
         balanceElement.textContent = balance;

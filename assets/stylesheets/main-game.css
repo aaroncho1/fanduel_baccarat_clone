@@ -151,10 +151,21 @@
 }
 
 .wager-selections {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 270px;
+}
+
+.wager-selections-block {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 270px;
+    height: 460px;
+    z-index: 1000;
 }
 
 .wager-selections-top > div {
