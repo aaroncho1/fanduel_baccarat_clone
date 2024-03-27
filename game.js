@@ -66,6 +66,10 @@ function blackOutChips(){
     Array.from(chipsImgElements).forEach(chip => chip.style.opacity = '.2');
 }
 
+function disableOnClickForChips(){
+    document.querySelector('.wager-selections-block').style.display = 'block';
+}
+
 function disableChips() {
     if (balance === 0) {
         for (let chipImg of document.querySelector('.wager-selections-bottom').children) {
@@ -224,6 +228,7 @@ function drawCardsForTie(){
     if (wager > 0 && wagerInEffect === false) {
         wagerInEffect = true;
         blackOutChips();
+        disableOnClickForChips();
         let tieDiv = document.querySelector('.tie');
         balance -= wager;
         balanceElement.textContent = balance;
