@@ -143,6 +143,7 @@
     min-height: 100px;
     min-width: 455.13px;
     max-width: 455.13px;
+    position: relative;
 }
 
 .wager-selections, .bet-limits, .bet-history-table-container {
@@ -210,4 +211,28 @@ th, td {
 .selections-box p:last-of-type {
     display: none;
     font-size: 1.5rem;
+}
+
+.tie-chip-selections, .banker-chip-selections, 
+.player-chip-selections {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tie-chip-selections > img,
+.banker-chip-selections > img,
+.player-chip-selections > img {
+    position: absolute;
+    top: 20px;
+    /* left: 0; */
+    height: 60px;
+    width: 60px;
+}
+
+.wager-effect {
+    background: #BAD7C8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

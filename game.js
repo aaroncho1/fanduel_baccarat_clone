@@ -18,6 +18,7 @@ let wagerSelectionsDiv = document.querySelector('.wager-selections-bottom');
 let chipsImgElements = wagerSelectionsDiv.children;
 let clearBtn = document.getElementById('clear-btn');
 let cashoutBtn = document.getElementById('cash-out-btn');
+let chipsWagerArr = [];
 
 function shrinkCards(){
     if (window.innerWidth > 1280){
@@ -72,12 +73,31 @@ function blackOutClearAndCashoutBtns(){
     [clearBtn, cashoutBtn].forEach(div => div.style.opacity = '.2');
 }
 
+function blackOutFirstSecondPElements(div){
+    for (let i = 0; i < 3; i++) {
+        Array.from(div.children)[i].style.opacity = '0';
+    }
+}
+
 function resetClearAndCashoutBtns(){
     [clearBtn, cashoutBtn].forEach(div => div.style.opacity = '1');
 }
 
 function disableOnClickForChips(){
     document.querySelector('.wager-selections-block').style.display = 'block';
+}
+
+//finish this function
+function addChipToSelection(div){
+    let classStr = div.className.split(' ')[0];
+    blackOutFirstSecondPElements(div);
+    div.classList.add('wager-effect');
+    chipsWagerArr.forEach((chip) => {
+        let newImgElement = document.createElement('img');
+        newImgElement.src = chip.src;
+        document.querySelector(`.${classStr}-chip-selections`).appendChild(newImgElement);
+        document.querySelector(`.${classStr}-chip-selections`).style.display = 'flex';
+    })
 }
 
 function disableChips() {
@@ -118,6 +138,7 @@ function setChipsAndCashoutBtn() {
                         document.getElementById(id).style.opacity = '.2';
                     } else {
                         if (wager + amount <= balance){
+                            chipsWagerArr.push(chip);
                             wagerElement.textContent = String(wager += amount);
                             disableChips();
                         } else {
@@ -137,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 document.getElementById('clear-btn').onclick = () => {
+    chipsWagerArr = [];
     wager = 0;
     wagerElement.textContent = "0.00";
 }
@@ -148,7 +170,6 @@ function mouseOverDivEffect(div){
         div.querySelector('p:nth-of-type(2)').style.display = 'none';
         div.querySelector('p:last-of-type').style.display = 'block';
         div.classList.add('selections-hover-effect');
-        div.style.border = "2px solid black";
     }
 }
 
@@ -234,9 +255,11 @@ function naturalStands(){
     return bankerScore > 7 || playerScore > 7;
 }
 
-function drawCardsForTie(){
+function drawCardsForTie(e){
     if (wager > 0 && wagerInEffect === false) {
         wagerInEffect = true;
+        console.log(e.target.children);
+        addChipToSelection(e.target);
         blackOutChips();
         blackOutClearAndCashoutBtns();
         disableOnClickForChips();
