@@ -16,6 +16,8 @@ let bankerCardsDiv = document.querySelector('.banker-cards');
 let playerCardsDiv = document.querySelector('.player-cards');
 let wagerSelectionsDiv = document.querySelector('.wager-selections-bottom');
 let chipsImgElements = wagerSelectionsDiv.children;
+let clearBtn = document.getElementById('clear-btn');
+let cashoutBtn = document.getElementById('cash-out-btn');
 
 function shrinkCards(){
     if (window.innerWidth > 1280){
@@ -64,6 +66,14 @@ function enableSelectedChips(indOne, indTwo) {
 
 function blackOutChips(){
     Array.from(chipsImgElements).forEach(chip => chip.style.opacity = '.2');
+}
+
+function blackOutClearAndCashoutBtns(){
+    [clearBtn, cashoutBtn].forEach(div => div.style.opacity = '.2');
+}
+
+function resetClearAndCashoutBtns(){
+    [clearBtn, cashoutBtn].forEach(div => div.style.opacity = '1');
 }
 
 function disableOnClickForChips(){
@@ -228,6 +238,7 @@ function drawCardsForTie(){
     if (wager > 0 && wagerInEffect === false) {
         wagerInEffect = true;
         blackOutChips();
+        blackOutClearAndCashoutBtns();
         disableOnClickForChips();
         let tieDiv = document.querySelector('.tie');
         balance -= wager;
