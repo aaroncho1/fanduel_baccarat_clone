@@ -98,7 +98,7 @@ function addChipToSelection(div){
         newImgElement.src = chip.src;
         document.querySelector(`.${classStr}-chip-selections`).appendChild(newImgElement);
         document.querySelector(`.${classStr}-chip-selections`).style.display = 'flex';
-        let positionTop = `${chipPosTop -= 5}px`;
+        let positionTop = `${chipPosTop -= 2}px`;
         newImgElement.style.top = positionTop;
     })
 }
