@@ -11,7 +11,6 @@ let playerScoreElement = document.getElementById('player-score');
 let playerScore = 0;
 let bankerScoreElement = document.getElementById('banker-score');
 let bankerScore = 0;
-let wagerInEffect = false;
 let bankerCardsDiv = document.querySelector('.banker-cards');
 let playerCardsDiv = document.querySelector('.player-cards');
 let wagerSelectionsDiv = document.querySelector('.wager-selections-bottom');
@@ -19,6 +18,7 @@ let chipsImgElements = wagerSelectionsDiv.children;
 let clearBtn = document.getElementById('clear-btn');
 let cashoutBtn = document.getElementById('cash-out-btn');
 let chipsWagerArr = [];
+let mouseOverSelectionsDiv = document.querySelector('.selections-mouseover-block');
 
 function shrinkCards(){
     if (window.innerWidth > 1280){
@@ -124,31 +124,37 @@ function disableChips() {
     }
 }
 
+function disableMouseOverSelections(){
+    mouseOverSelectionsDiv.style.display = 'block';
+}
+
+function enableMouseOverSelections(){
+    mouseOverSelectionsDiv.style.display = 'none';
+}
+
 document.addEventListener("DOMContentLoaded", disableChips);
 
 
 function setChipsAndCashoutBtn() {
-    if (!wagerInEffect){
-        balance === 0 ? cashOutBtnElement.style.opacity = '.2' : cashOutBtnElement.style.opacity = '1';
-        Array.from(chipsImgElements).forEach( chip => {
-            chip.addEventListener('click', () => {
-                let amount = Number(chip.id.split('-')[0]);
-                if (wager < balance){
-                    if (balance < amount){
-                        document.getElementById(id).style.opacity = '.2';
+    balance === 0 ? cashOutBtnElement.style.opacity = '.2' : cashOutBtnElement.style.opacity = '1';
+    Array.from(chipsImgElements).forEach( chip => {
+        chip.addEventListener('click', () => {
+            let amount = Number(chip.id.split('-')[0]);
+            if (wager < balance){
+                if (balance < amount){
+                    document.getElementById(id).style.opacity = '.2';
+                } else {
+                    if (wager + amount <= balance){
+                        chipsWagerArr.push(chip);
+                        wagerElement.textContent = String(wager += amount);
+                        disableChips();
                     } else {
-                        if (wager + amount <= balance){
-                            chipsWagerArr.push(chip);
-                            wagerElement.textContent = String(wager += amount);
-                            disableChips();
-                        } else {
-                            disableChips();
-                        }
+                        disableChips();
                     }
                 }
-            })
+            }
         })
-    }
+    })
 }
 
 document.addEventListener('DOMContentLoaded', setChipsAndCashoutBtn);
@@ -164,7 +170,7 @@ document.getElementById('clear-btn').onclick = () => {
 }
 
 function mouseOverDivEffect(div){
-    if (wager > 0 && wagerInEffect === false) {
+    if (wager > 0) {
         document.getElementById(`mouseover-${div.className}-wager`).textContent = wager;
         div.querySelector('p:first-of-type').style.display = 'none';
         div.querySelector('p:nth-of-type(2)').style.display = 'none';
@@ -219,7 +225,7 @@ function drawFirstTwo(){
     setTimeout(drawPlayerCard, 3000);
     setTimeout(drawBankerCard, 4000);
     setTimeout(() => {
-        wagerInEffect = false;
+        enableMouseOverSelections();
     }, 6000)
 }
 
@@ -256,9 +262,8 @@ function naturalStands(){
 }
 
 function drawCardsForTie(e){
-    if (wager > 0 && wagerInEffect === false) {
-        wagerInEffect = true;
-        console.log(e.target.children);
+    if (wager > 0) {
+        disableMouseOverSelections();
         addChipToSelection(e.target);
         blackOutChips();
         blackOutClearAndCashoutBtns();

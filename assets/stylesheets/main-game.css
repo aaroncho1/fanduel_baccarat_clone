@@ -131,7 +131,7 @@
     font-weight: bold;
 }
 
-.selections-box > div {
+.selections-box > div:not(:nth-last-of-type(1)) {
     padding: 2px;
     text-align: center;
     margin-bottom: 10px;
@@ -225,7 +225,6 @@ th, td {
 .player-chip-selections > img {
     position: absolute;
     top: 20px;
-    /* left: 0; */
     height: 60px;
     width: 60px;
 }
@@ -235,4 +234,17 @@ th, td {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.selections-box {
+    position: relative;
+}
+
+.selections-mouseover-block {
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 460px;
+    height: 460px;
+    z-index: 1000;
 }
