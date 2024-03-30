@@ -227,6 +227,7 @@ th, td {
     top: 20px;
     height: 60px;
     width: 60px;
+    z-index: 100;
 }
 
 .wager-effect {

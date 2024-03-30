@@ -19,6 +19,7 @@ let clearBtn = document.getElementById('clear-btn');
 let cashoutBtn = document.getElementById('cash-out-btn');
 let chipsWagerArr = [];
 let mouseOverSelectionsDiv = document.querySelector('.selections-mouseover-block');
+let chipPosTop = 15;
 
 function shrinkCards(){
     if (window.innerWidth > 1280){
@@ -97,6 +98,8 @@ function addChipToSelection(div){
         newImgElement.src = chip.src;
         document.querySelector(`.${classStr}-chip-selections`).appendChild(newImgElement);
         document.querySelector(`.${classStr}-chip-selections`).style.display = 'flex';
+        let positionTop = `${chipPosTop -= 5}px`;
+        newImgElement.style.top = positionTop;
     })
 }
 
