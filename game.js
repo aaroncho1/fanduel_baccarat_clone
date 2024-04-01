@@ -98,15 +98,7 @@ function disableOnClickForChips(){
 function addChipToSelection(div){
     let classStr = div.className.split(' ')[0];
     let posChange;
-    if (chipsWagerArr.length <= 5){
-        posChange = 5;
-    } else if (chipsWagerArr.length > 5 && chipsWagerArr.length <= 25){
-        posChange = 2;
-    } else if (chipsWagerArr.length > 25 && chipsWagerArr.length <= 50){
-        posChange = 1;
-    } else {
-        posChange = 0;
-    }
+    posChange = setNewPos(chipsWagerArr.length);
     blackOutFirstSecondPElements(div);
     div.classList.add('wager-effect');
     chipsWagerArr.forEach((chip) => {
@@ -117,6 +109,18 @@ function addChipToSelection(div){
         let positionTop = `${chipPosTop -= posChange}px`;
         newImgElement.style.top = positionTop;
     })
+}
+
+function setNewPos(arrLength){
+    if (arrLength <= 5) {
+        return 5;
+    } else if (arrLength > 5 && arrLength <= 25) {
+        return 2;
+    } else if (arrLength > 25 && arrLength <= 50) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 function disableChips() {
