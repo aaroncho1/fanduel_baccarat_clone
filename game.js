@@ -84,6 +84,12 @@ function resetClearAndCashoutBtns(){
     [clearBtn, cashoutBtn].forEach(div => div.style.opacity = '1');
 }
 
+function setNewBalance(){
+    balance -= wager;
+    let newBalance = String(balance).includes('.') ? String(balance) + '0' : String(balance) + '.00';
+    balanceElement.textContent = newBalance;
+}
+
 function disableOnClickForChips(){
     document.querySelector('.wager-selections-block').style.display = 'block';
 }
@@ -159,7 +165,8 @@ function setChipsAndCashoutBtn() {
                 } else {
                     if (wager + amount <= balance){
                         chipsWagerArr.push(chip);
-                        wagerElement.textContent = String(wager += amount);
+                        let newWager = wager += amount;
+                        wagerElement.textContent = String(newWager) + '.00';
                         disableChips();
                     } else {
                         disableChips();
@@ -281,9 +288,7 @@ function drawCardsForTie(e){
         blackOutChips();
         blackOutClearAndCashoutBtns();
         disableOnClickForChips();
-        let tieDiv = document.querySelector('.tie');
-        balance -= wager;
-        balanceElement.textContent = balance;
+        setNewBalance();
         drawFirstTwo();
         setTimeout(() => {
             if (naturalStands()){
