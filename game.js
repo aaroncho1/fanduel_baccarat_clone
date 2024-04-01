@@ -124,18 +124,18 @@ function disableChips() {
         for (let chipImg of document.querySelector('.wager-selections-bottom').children) {
             chipImg.style.opacity = '.2';
         }
-    } else if (balance < 1) {
+    } else if (balance - wager < 1) {
         disableSelectedChips(0,5);
-    } else if (balance < 25) {
+    } else if (balance - wager < 5) {
         disableSelectedChips(1, 4);
         enableSelectedChips(0,1);
-    } else if (balance < 100) {
+    } else if (balance - wager < 25) {
         disableSelectedChips(2, 3);
         enableSelectedChips(0, 2);
-    } else if (balance < 500) {
+    } else if (balance - wager < 100) {
         disableSelectedChips(3, 2);
         enableSelectedChips(0, 3);
-    } else if (balance < 1000) {
+    } else if (balance - wager < 500) {
         disableSelectedChips(4,1);
         enableSelectedChips(0, 4);
     } else {
@@ -187,6 +187,7 @@ document.getElementById('clear-btn').onclick = () => {
     chipsWagerArr = [];
     wager = 0;
     wagerElement.textContent = "0.00";
+    disableChips();
 }
 
 function mouseOverDivEffect(div){
