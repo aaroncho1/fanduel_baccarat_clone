@@ -94,7 +94,7 @@ function disableOnClickForChips(){
     document.querySelector('.wager-selections-block').style.display = 'block';
 }
 
-//next step: set up function to divide chips based on wager amount
+//next step: work on setting chips stack based on duplicates of chips
 function addChipToSelection(div){
     let classStr = div.className.split(' ')[0];
     let posChange;
