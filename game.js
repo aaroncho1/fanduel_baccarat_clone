@@ -91,6 +91,16 @@ function disableOnClickForChips(){
 //next step: set up function to divide chips based on wager amount
 function addChipToSelection(div){
     let classStr = div.className.split(' ')[0];
+    let posChange;
+    if (chipsWagerArr.length <= 5){
+        posChange = 5;
+    } else if (chipsWagerArr.length > 5 && chipsWagerArr.length <= 25){
+        posChange = 2;
+    } else if (chipsWagerArr.length > 25 && chipsWagerArr.length <= 50){
+        posChange = 1;
+    } else {
+        posChange = 0;
+    }
     blackOutFirstSecondPElements(div);
     div.classList.add('wager-effect');
     chipsWagerArr.forEach((chip) => {
@@ -98,7 +108,7 @@ function addChipToSelection(div){
         newImgElement.src = chip.src;
         document.querySelector(`.${classStr}-chip-selections`).appendChild(newImgElement);
         document.querySelector(`.${classStr}-chip-selections`).style.display = 'flex';
-        let positionTop = `${chipPosTop -= 2}px`;
+        let positionTop = `${chipPosTop -= posChange}px`;
         newImgElement.style.top = positionTop;
     })
 }
