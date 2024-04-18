@@ -17,9 +17,9 @@ let wagerSelectionsDiv = document.querySelector('.wager-selections-bottom');
 let chipsImgElements = wagerSelectionsDiv.children;
 let clearBtn = document.getElementById('clear-btn');
 let cashoutBtn = document.getElementById('cash-out-btn');
-let chipsWagerArr = [];
 let mouseOverSelectionsDiv = document.querySelector('.selections-mouseover-block');
 let chipPosTop = 15;
+let chipsWagerArr = [];
 
 function shrinkCards(){
     if (window.innerWidth > 1280){
@@ -98,16 +98,26 @@ function disableOnClickForChips(){
 function addChipToSelection(div){
     let classStr = div.className.split(' ')[0];
     let posChange;
-    posChange = setNewPos(chipsWagerArr.length);
     blackOutFirstSecondPElements(div);
     div.classList.add('wager-effect');
-    chipsWagerArr.forEach((chip) => {
+    getChipsWagerArr(wager);
+    posChange = setNewPos(chipsWagerArr.length);
+    chipsWagerArr.forEach((chipAmt) => {
         let newImgElement = document.createElement('img');
-        newImgElement.src = chip.src;
+        newImgElement.src = `./assets/images/${chipAmt}-chip.png`;
         document.querySelector(`.${classStr}-chip-selections`).appendChild(newImgElement);
         document.querySelector(`.${classStr}-chip-selections`).style.display = 'flex';
         let positionTop = `${chipPosTop -= posChange}px`;
         newImgElement.style.top = positionTop;
+    })
+}
+
+function getChipsWagerArr(dupWager) {
+    [500, 100, 25, 5, 1].forEach(chipAmt => {
+        while (dupWager % chipAmt < dupWager) {
+            chipsWagerArr.push(chipAmt);
+            dupWager -= chipAmt;
+        }
     })
 }
 
@@ -168,7 +178,6 @@ function setChipsAndCashoutBtn() {
                     document.getElementById(id).style.opacity = '.2';
                 } else {
                     if (wager + amount <= balance){
-                        chipsWagerArr.push(chip);
                         let newWager = wager += amount;
                         wagerElement.textContent = String(newWager) + '.00';
                         disableChips();
