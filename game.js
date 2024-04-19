@@ -84,8 +84,7 @@ function resetClearAndCashoutBtns(){
     [clearBtn, cashoutBtn].forEach(div => div.style.opacity = '1');
 }
 
-function setNewBalance(){
-    balance -= wager;
+function setNewBalance(balance){
     let newBalance = String(balance).includes('.') ? String(balance) + '0' : String(balance) + '.00';
     balanceElement.textContent = newBalance;
 }
@@ -232,6 +231,15 @@ function mouseOutAllSelections(){
     }))
 }
 
+function settleBet(bet) {
+    if (bet === 'tie') {
+        if (playerScore === bankerScore) {
+            balance += wager + (wager * 8);
+            setNewBalance(balance);
+        } 
+    }
+}
+
 function drawPlayerCard(){
     let drawnCard = cardsArr[Math.floor(Math.random() * cardsArr.length)];
     let cardImgElement = document.createElement('img');
@@ -294,14 +302,16 @@ function naturalStands(){
     return bankerScore > 7 || playerScore > 7;
 }
 
-function drawCardsForTie(e){
+function drawCards(e){
     if (wager > 0) {
+        let betSelection = e.target.className.split(' ')[0];
         disableMouseOverSelections();
         addChipToSelection(e.target);
         blackOutChips();
         blackOutClearAndCashoutBtns();
         disableOnClickForChips();
-        setNewBalance();
+        balance -= wager;
+        setNewBalance(balance);
         drawFirstTwo();
         setTimeout(() => {
             if (naturalStands()){
@@ -312,8 +322,11 @@ function drawCardsForTie(e){
                 drawThirdBankerCard();
             }
         }, 5000);
+        setTimeout(() => {
+            settleBet(betSelection);
+        }, 7000)
     }
     //have to finish function logic
 }
 
-document.querySelector('.tie').addEventListener('click', drawCardsForTie);
+document.querySelector('.tie').addEventListener('click', drawCards);
