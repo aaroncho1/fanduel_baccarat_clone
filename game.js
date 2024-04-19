@@ -195,6 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 document.getElementById('clear-btn').onclick = () => {
+    resetWagerAndDisableChips();
+}
+
+function resetWagerAndDisableChips() {
     chipsWagerArr = [];
     wager = 0;
     wagerElement.textContent = "0.00";
@@ -238,6 +242,30 @@ function settleBet(bet) {
             setNewBalance(balance);
         } 
     }
+}
+
+function resetUIChanges(div) {
+    for (let i = 0; i < 3; i++) {
+        Array.from(div.children)[i].style.opacity = '1';
+    }
+    div.classList.remove('wager-effect');
+    let tieSelectionsDiv = document.querySelector('.tie-chip-selections')
+    let tieSelectionsArr = Array.from(tieSelectionsDiv.children);
+    tieSelectionsArr.forEach( imgEl => tieSelectionsDiv.removeChild(imgEl));
+    resetWagerAndDisableChips();
+    balance === 0 ? cashOutBtnElement.style.opacity = '.2' : cashOutBtnElement.style.opacity = '1';
+    clearBtn.style.opacity = '1';
+    document.querySelector('.wager-selections-block').style.display = 'none';
+    // resetScoreAndClearCards();
+}
+
+function resetScoreAndClearCards() {
+    playerScore = 0;
+    playerScoreElement.textContent = playerScore;
+    bankerScore = 0;
+    bankerScoreElement.textContent = bankerScore;
+    Array.from(playerCardsDiv.children).forEach(imgEl => playerCardsDiv.removeChild(imgEl));
+    Array.from(bankerCardsDiv.children).forEach(imgEl => bankerCardsDiv.removeChild(imgEl));
 }
 
 function drawPlayerCard(){
@@ -315,6 +343,8 @@ function drawCards(e){
         drawFirstTwo();
         setTimeout(() => {
             if (naturalStands()){
+                settleBet(betSelection);
+                resetUIChanges(e.target);
                 return;
             } else {
                 drawThirdPlayerCard();
@@ -322,9 +352,12 @@ function drawCards(e){
                 drawThirdBankerCard();
             }
         }, 5000);
-        setTimeout(() => {
-            settleBet(betSelection);
-        }, 7000)
+        if (!naturalStands()) { 
+            setTimeout(() => {
+                settleBet(betSelection);
+                resetUIChanges(e.target);
+            }, 6000);
+        } 
     }
     //have to finish function logic
 }
