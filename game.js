@@ -362,12 +362,14 @@ function drawCards(e){
         setTimeout(() => {
             if (!naturalStands() && ((thirdPlayerCardDrawn && !thirdBankerCardDrawn) || (!thirdPlayerCardDrawn && thirdBankerCardDrawn))) {
                 settleBet(betSelection);
+                enableMouseOverSelections();
                 resetUIChanges(e.target);
             }
         }, 6010);
         setTimeout(() => {
             if (!naturalStands() && (thirdPlayerCardDrawn && thirdBankerCardDrawn)) {
                 settleBet(betSelection);
+                enableMouseOverSelections();
                 resetUIChanges(e.target);
             }
         }, 7000);
