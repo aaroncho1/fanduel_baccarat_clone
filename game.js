@@ -20,6 +20,8 @@ let cashoutBtn = document.getElementById('cash-out-btn');
 let mouseOverSelectionsDiv = document.querySelector('.selections-mouseover-block');
 let chipPosTop = 15;
 let chipsWagerArr = [];
+let thirdPlayerCardDrawn = false;
+let thirdBankerCardDrawn = false;
 
 function shrinkCards(){
     if (window.innerWidth > 1280){
@@ -293,17 +295,16 @@ function drawFirstTwo(){
     setTimeout(drawBankerCard, 2000);
     setTimeout(drawPlayerCard, 3000);
     setTimeout(drawBankerCard, 4000);
-    setTimeout(() => {
-        enableMouseOverSelections();
-    }, 6000)
 }
 
 function drawThirdPlayerCard(){
     if (playerScore < 6){
         drawPlayerCard();
+        thirdPlayerCardDrawn = true;
         drawThirdBankerCard();
     } else {
         drawBankerCard();
+        thirdBankerCardDrawn = true;
     }
 }
 
@@ -311,14 +312,19 @@ function drawThirdBankerCard(){
     setTimeout(() => {
         if (bankerScore <= 2 && bankerCardsDiv.children.length < 3){
             drawBankerCard();
+            thirdBankerCardDrawn = true;
         } else if (bankerCardsDiv.children.length < 3 && bankerScore === 3 && parseInt(playerCardsDiv.children[2].src.split('-card')[0][playerCardsDiv.children[2].src.split('-card')[0].length - 1]) !== 8){
             drawBankerCard();
+            thirdBankerCardDrawn = true;
         } else if (bankerCardsDiv.children.length < 3 && bankerScore === 4 && [2, 3, 4, 5, 6, 7].includes(parseInt(playerCardsDiv.children[2].src.split('-card')[0][playerCardsDiv.children[2].src.split('-card')[0].length - 1]))){
             drawBankerCard();
+            thirdBankerCardDrawn = true;
         } else if (bankerCardsDiv.children.length < 3 && bankerScore === 5 && [4, 5, 6, 7].includes(parseInt(playerCardsDiv.children[2].src.split('-card')[0][playerCardsDiv.children[2].src.split('-card')[0].length - 1]))){
             drawBankerCard();
+            thirdBankerCardDrawn = true;
         } else if (bankerCardsDiv.children.length < 3 && bankerScore === 6 && [6, 7].includes(parseInt(playerCardsDiv.children[2].src.split('-card')[0][playerCardsDiv.children[2].src.split('-card')[0].length - 1]))) {
             drawBankerCard();
+            thirdBankerCardDrawn = true;
         } else if (bankerCardsDiv.children.length < 3 && bankerScore >= 7){
             return;
         }
@@ -327,7 +333,7 @@ function drawThirdBankerCard(){
 }
 
 function naturalStands(){
-    return bankerScore > 7 || playerScore > 7;
+    return (bankerScore > 7 || playerScore > 7) && (playerCardsDiv.children.length < 3 && bankerCardsDiv.children.length < 3)
 }
 
 function drawCards(e){
@@ -344,6 +350,7 @@ function drawCards(e){
         setTimeout(() => {
             if (naturalStands()){
                 settleBet(betSelection);
+                enableMouseOverSelections();
                 resetUIChanges(e.target);
                 return;
             } else {
@@ -352,12 +359,18 @@ function drawCards(e){
                 drawThirdBankerCard();
             }
         }, 5000);
-        if (!naturalStands()) { 
-            setTimeout(() => {
+        setTimeout(() => {
+            if (!naturalStands() && ((thirdPlayerCardDrawn && !thirdBankerCardDrawn) || (!thirdPlayerCardDrawn && thirdBankerCardDrawn))) {
                 settleBet(betSelection);
                 resetUIChanges(e.target);
-            }, 6000);
-        } 
+            }
+        }, 6010);
+        setTimeout(() => {
+            if (!naturalStands() && (thirdPlayerCardDrawn && thirdBankerCardDrawn)) {
+                settleBet(betSelection);
+                resetUIChanges(e.target);
+            }
+        }, 7000);
     }
     //have to finish function logic
 }
