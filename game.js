@@ -247,11 +247,15 @@ function settleBet(bet) {
 }
 
 function addScoreHistory() {
+    let textColor;
     let trEl = document.createElement('tr');
     let tdPlayerEl = document.createElement('td');
     let tdBankerEl = document.createElement('td');
     tdPlayerEl.textContent = `${playerScore}`;
     tdBankerEl.textContent = `${bankerScore}`;
+    if (playerScore !== bankerScore) {
+        playerScore > bankerScore ? tdPlayerEl.style.color = '#6398F5' : tdBankerEl.style.color = '#E63924';
+    }
     trEl.appendChild(tdPlayerEl);
     trEl.appendChild(tdBankerEl);
     document.querySelector('.bet-history-table').appendChild(trEl);
