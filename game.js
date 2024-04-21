@@ -247,6 +247,9 @@ function settleBet(bet) {
 }
 
 function resetUIChanges(div) {
+    chipPosTop = 15;
+    thirdBankerCardDrawn = false;
+    thirdPlayerCardDrawn = false;
     for (let i = 0; i < 3; i++) {
         Array.from(div.children)[i].style.opacity = '1';
     }
@@ -258,7 +261,6 @@ function resetUIChanges(div) {
     balance === 0 ? cashOutBtnElement.style.opacity = '.2' : cashOutBtnElement.style.opacity = '1';
     clearBtn.style.opacity = '1';
     document.querySelector('.wager-selections-block').style.display = 'none';
-    // resetScoreAndClearCards();
 }
 
 function resetScoreAndClearCards() {
@@ -338,6 +340,7 @@ function naturalStands(){
 
 function drawCards(e){
     if (wager > 0) {
+        resetScoreAndClearCards();
         let betSelection = e.target.className.split(' ')[0];
         disableMouseOverSelections();
         addChipToSelection(e.target);
