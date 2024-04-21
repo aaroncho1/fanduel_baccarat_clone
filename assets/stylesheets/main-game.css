@@ -185,6 +185,21 @@ th, td {
     overflow: auto;
 }
 
+.bet-history-table {
+    height: 460px;
+}
+
+.bet-history-table tbody {
+    display: block;
+    height: 27px;
+}
+
+.bet-history-table tr {
+    display: block;
+    height: 27px;
+    margin-bottom: 0;
+}
+
 #clear-btn, #cash-out-btn {
     width: 100%;
     text-align: center;

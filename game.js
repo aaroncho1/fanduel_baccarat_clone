@@ -246,6 +246,17 @@ function settleBet(bet) {
     }
 }
 
+function addScoreHistory() {
+    let trEl = document.createElement('tr');
+    let tdPlayerEl = document.createElement('td');
+    let tdBankerEl = document.createElement('td');
+    tdPlayerEl.textContent = `${playerScore}`;
+    tdBankerEl.textContent = `${bankerScore}`;
+    trEl.appendChild(tdPlayerEl);
+    trEl.appendChild(tdBankerEl);
+    document.querySelector('.bet-history-table').appendChild(trEl);
+}
+
 function resetUIChanges(div) {
     chipPosTop = 15;
     thirdBankerCardDrawn = false;
@@ -353,6 +364,7 @@ function drawCards(e){
         setTimeout(() => {
             if (naturalStands()){
                 settleBet(betSelection);
+                addScoreHistory();
                 enableMouseOverSelections();
                 resetUIChanges(e.target);
                 return;
@@ -365,6 +377,7 @@ function drawCards(e){
         setTimeout(() => {
             if (!naturalStands() && ((thirdPlayerCardDrawn && !thirdBankerCardDrawn) || (!thirdPlayerCardDrawn && thirdBankerCardDrawn))) {
                 settleBet(betSelection);
+                addScoreHistory();
                 enableMouseOverSelections();
                 resetUIChanges(e.target);
             }
@@ -372,6 +385,7 @@ function drawCards(e){
         setTimeout(() => {
             if (!naturalStands() && (thirdPlayerCardDrawn && thirdBankerCardDrawn)) {
                 settleBet(betSelection);
+                addScoreHistory();
                 enableMouseOverSelections();
                 resetUIChanges(e.target);
             }
