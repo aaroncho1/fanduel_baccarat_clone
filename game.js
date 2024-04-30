@@ -242,7 +242,27 @@ function settleBet(bet) {
         if (playerScore === bankerScore) {
             balance += wager + (wager * 8);
             setNewBalance(balance);
-        } 
+        }
+    } else if (bet === 'banker') {
+        if (bankerScore > playerScore) {
+            balance += wager + (wager * .95);
+            setNewBalance(balance);
+        } else if (playerScore > bankerScore) {
+            return;
+        } else if (playerScore === bankerScore) {
+            balance += wager;
+            setNewBalance(balance);
+        }
+    } else if (bet === 'player') {
+        if (playerScore > bankerScore) {
+            balance += wager + wager;
+            setNewBalance(balance);
+        } else if (bankerScore > playerScore) {
+            return;
+        } else if (playerScore === bankerScore) {
+            balance += wager;
+            setNewBalance(balance);
+        }
     }
 }
 
@@ -269,9 +289,10 @@ function resetUIChanges(div) {
         Array.from(div.children)[i].style.opacity = '1';
     }
     div.classList.remove('wager-effect');
-    let tieSelectionsDiv = document.querySelector('.tie-chip-selections')
-    let tieSelectionsArr = Array.from(tieSelectionsDiv.children);
-    tieSelectionsArr.forEach( imgEl => tieSelectionsDiv.removeChild(imgEl));
+    let betSelection = div.className.split(' ')[0];
+    let selectionsDiv = document.querySelector(`.${betSelection}-chip-selections`)
+    let selectionsArr = Array.from(selectionsDiv.children);
+    selectionsArr.forEach( imgEl => selectionsDiv.removeChild(imgEl));
     resetWagerAndDisableChips();
     balance === 0 ? cashOutBtnElement.style.opacity = '.2' : cashOutBtnElement.style.opacity = '1';
     clearBtn.style.opacity = '1';
@@ -395,7 +416,8 @@ function drawCards(e){
             }
         }, 7000);
     }
-    //have to finish function logic
 }
 
 document.querySelector('.tie').addEventListener('click', drawCards);
+document.querySelector('.banker').addEventListener('click', drawCards);
+document.querySelector('.player').addEventListener('click', drawCards);
