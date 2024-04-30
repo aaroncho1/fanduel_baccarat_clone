@@ -206,8 +206,16 @@ document.addEventListener('DOMContentLoaded', () => {
     mouseOutAllSelections();
 })
 
-clearBtn.onclick = () => {
-    resetWagerAndDisableChips();
+clearBtn.onclick = resetWagerAndDisableChips;
+cashoutBtn.onclick = addBalanceToFunds;
+
+function addBalanceToFunds() {
+    if (balance > 0) {
+        document.querySelector('.funds-value').textContent = balanceElement.textContent;
+    }
+    balance = 0;
+    setNewBalance(balance);
+    disableChips();
 }
 
 function resetWagerAndDisableChips() {
