@@ -2,7 +2,6 @@ let wager = parseFloat(parseFloat((document.getElementById('total-wager')).textC
 let wagerElement = document.getElementById('total-wager');
 let balance = parseFloat(parseFloat((document.getElementById('available-balance')).textContent).toFixed(2))
 let balanceElement = document.getElementById('available-balance');
-let cashOutBtnElement = document.getElementById('cash-out-btn');
 let cardsObj = {
     '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'A': 1, 'J': 10, 'Q': 10, 'K': 10
 };
@@ -87,7 +86,18 @@ function resetClearAndCashoutBtns(){
 }
 
 function setNewBalance(balance){
-    let newBalance = String(balance).includes('.') ? String(balance) + '0' : String(balance) + '.00';
+    let newBalance;
+    let balanceStr = String(balance);
+    let balanceArr = balanceStr.split('.');
+    if (balanceStr.includes('.')) {
+        if (balanceArr[1].length === 1) {
+            newBalance = balanceStr + '0';
+        } else {
+            newBalance = balanceStr;
+        }
+    } else {
+        newBalance = balanceStr + '.00';
+    }
     balanceElement.textContent = newBalance;
 }
 
@@ -169,7 +179,7 @@ document.addEventListener("DOMContentLoaded", disableChips);
 
 
 function setChipsAndCashoutBtn() {
-    balance === 0 ? cashOutBtnElement.style.opacity = '.2' : cashOutBtnElement.style.opacity = '1';
+    balance === 0 ? cashoutBtn.style.opacity = '.2' : cashoutBtn.style.opacity = '1';
     Array.from(chipsImgElements).forEach( chip => {
         chip.addEventListener('click', () => {
             let amount = Number(chip.id.split('-')[0]);
@@ -196,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mouseOutAllSelections();
 })
 
-document.getElementById('clear-btn').onclick = () => {
+clearBtn.onclick = () => {
     resetWagerAndDisableChips();
 }
 
@@ -294,7 +304,7 @@ function resetUIChanges(div) {
     let selectionsArr = Array.from(selectionsDiv.children);
     selectionsArr.forEach( imgEl => selectionsDiv.removeChild(imgEl));
     resetWagerAndDisableChips();
-    balance === 0 ? cashOutBtnElement.style.opacity = '.2' : cashOutBtnElement.style.opacity = '1';
+    balance === 0 ? cashoutBtn.style.opacity = '.2' : cashoutBtn.style.opacity = '1';
     clearBtn.style.opacity = '1';
     document.querySelector('.wager-selections-block').style.display = 'none';
 }
