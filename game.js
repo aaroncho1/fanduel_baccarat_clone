@@ -77,7 +77,7 @@ function blackOutClearAndCashoutBtns(){
 
 function blackOutFirstSecondPElements(div){
     for (let i = 0; i < 3; i++) {
-        Array.from(div.children)[i].style.opacity = '0';
+        Array.from(div.children)[i] ? Array.from(div.children)[i].style.opacity = '0' : '';
     }
 }
 
@@ -115,8 +115,8 @@ function addChipToSelection(div){
     chipsWagerArr.forEach((chipAmt) => {
         let newImgElement = document.createElement('img');
         newImgElement.src = `./assets/images/${chipAmt}-chip.png`;
-        document.querySelector(`.${classStr}-chip-selections`).appendChild(newImgElement);
-        document.querySelector(`.${classStr}-chip-selections`).style.display = 'flex';
+        document.querySelector(`.${classStr}-chip-selections`) ? document.querySelector(`.${classStr}-chip-selections`).appendChild(newImgElement) : '';
+        document.querySelector(`.${classStr}-chip-selections`) ? document.querySelector(`.${classStr}-chip-selections`).style.display = 'flex' : '';
         let positionTop = `${chipPosTop -= posChange}px`;
         newImgElement.style.top = positionTop;
     })
@@ -226,31 +226,39 @@ function resetWagerAndDisableChips() {
 }
 
 function mouseOverDivEffect(div){
+    let spanTag = document.getElementById(`mouseover-${div.className}-wager`);
+    let firstP = div.querySelector('p:first-of-type');
+    let secondP = div.querySelector('p:nth-of-type(2)');
+    let thirdP = div.querySelector('p:last-of-type');
     if (wager > 0) {
-        document.getElementById(`mouseover-${div.className}-wager`).textContent = wager;
-        div.querySelector('p:first-of-type').style.display = 'none';
-        div.querySelector('p:nth-of-type(2)').style.display = 'none';
-        div.querySelector('p:last-of-type').style.display = 'block';
+        spanTag ? spanTag.textContent = wager : '';
+        firstP ? firstP.style.display = 'none' : '';
+        secondP ? secondP.style.display = 'none' : '';
+        thirdP ? thirdP.style.display = 'block' : '';
         div.classList.add('selections-hover-effect');
     }
 }
 
 function mouseOutDivEffect(div){
-    div.querySelector('p:first-of-type').style.display = 'block';
-    div.querySelector('p:nth-of-type(2)').style.display = 'block';
-    div.querySelector('p:last-of-type').style.display = 'none';
+    let spanTag = document.getElementById(`mouseover-${div.className}-wager`);
+    let firstP = div.querySelector('p:first-of-type');
+    let secondP = div.querySelector('p:nth-of-type(2)');
+    let thirdP = div.querySelector('p:last-of-type');
+    firstP ? firstP.style.display = 'block' : '';
+    secondP ? secondP.style.display = 'block': '';
+    thirdP ? thirdP.style.display = 'none': '';
     div.classList.remove('selections-hover-effect');
     div.style.border = "2px solid #BAD7C8";
 }
 
 function mouseOverAllSelections(){
-    Array.from(document.querySelector('.selections-box').children).forEach(div => div.addEventListener("mouseover", () => {
+    Array.from(document.querySelector('.selections-box').children).slice(0,3).forEach(div => div.addEventListener("mouseover", () => {
         mouseOverDivEffect(div);
     }))
 }
 
 function mouseOutAllSelections(){
-    Array.from(document.querySelector('.selections-box').children).forEach(div => div.addEventListener("mouseout", () => {
+    Array.from(document.querySelector('.selections-box').children).slice(0,3).forEach(div => div.addEventListener("mouseout", () => {
         mouseOutDivEffect(div);
     }))
 }
