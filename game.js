@@ -1,6 +1,6 @@
 let wager = parseFloat(parseFloat((document.getElementById('total-wager')).textContent).toFixed(2))
 let wagerElement = document.getElementById('total-wager');
-let balance = parseFloat(parseFloat((document.getElementById('available-balance')).textContent).toFixed(2))
+let balance = parseFloat(parseFloat((document.getElementById('available-balance')).textContent).toFixed(2));
 let balanceElement = document.getElementById('available-balance');
 let cardsObj = {
     '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'A': 1, 'J': 10, 'Q': 10, 'K': 10
@@ -312,12 +312,12 @@ function resetUIChanges(div) {
     thirdBankerCardDrawn = false;
     thirdPlayerCardDrawn = false;
     for (let i = 0; i < 3; i++) {
-        Array.from(div.children)[i].style.opacity = '1';
+        Array.from(div.children)[i] ? Array.from(div.children)[i].style.opacity = '1' : '';
     }
     div.classList.remove('wager-effect');
     let betSelection = div.className.split(' ')[0];
-    let selectionsDiv = document.querySelector(`.${betSelection}-chip-selections`)
-    let selectionsArr = Array.from(selectionsDiv.children);
+    let selectionsDiv = document.querySelector(`.${betSelection}-chip-selections`);
+    let selectionsArr = selectionsDiv ? Array.from(selectionsDiv.children) : [];
     selectionsArr.forEach( imgEl => selectionsDiv.removeChild(imgEl));
     resetWagerAndDisableChips();
     balance === 0 ? cashoutBtn.style.opacity = '.2' : cashoutBtn.style.opacity = '1';
