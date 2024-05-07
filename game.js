@@ -98,6 +98,7 @@ function setNewBalance(balance){
     } else {
         newBalance = balanceStr + '.00';
     }
+    newBalance.split('.')[1].length > 2 ? newBalance = newBalance.split('.')[0] + '.' + newBalance.split('.')[1].substring(0,2) : '';
     balanceElement.textContent = newBalance;
 }
 
